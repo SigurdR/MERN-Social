@@ -1,0 +1,31 @@
+{
+  "name": "MERN_Skeleton",
+  "version": "1.0.0",
+  "description": "A MERN Skeleton",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "development": "nodemon"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^6.1.0",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.13.7",
+    "nodemon": "^2.0.12"
+  }
+}
