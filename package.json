@@ -2,7 +2,7 @@
   "name": "MERN_Skeleton",
   "version": "1.0.0",
   "description": "A MERN Skeleton",
-  "main": "index.js",
+  "main": "./dist/server.generated.js",
   "license": "MIT",
   "scripts": {
     "development": "nodemon"

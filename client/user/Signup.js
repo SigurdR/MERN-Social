@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
   }))
 
 export default function Signup() {
+    const classes = useStyles();
     const [values, setValues] = useState({
         name: '',
         password: '',
@@ -96,7 +97,7 @@ export default function Signup() {
                     </Button>
                 </CardActions>
             </Card>
-            <Dialog open={values.open} disableBackdropClick={true}>
+            <Dialog open={values.open}>
                     <DialogTitle>
                         New Account
                     </DialogTitle>

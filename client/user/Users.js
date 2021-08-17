@@ -4,6 +4,20 @@ import { IconButton, ListItemSecondaryAction, Typography } from '@material-ui/co
 import { Paper, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import Person from '@material-ui/icons/Person';
+import { Link } from 'react-router-dom';
+import { list } from './api-user.js';
+
+const useStyles = makeStyles(theme => ({
+    root: theme.mixins.gutters({
+        padding: theme.spacing(1),
+        margin: theme.spacing(5)
+    }),
+    title: {
+        margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
+        color: theme.palette.openTitle
+    }
+}))
 
 export default function Users() {
     const classes = useStyles();
