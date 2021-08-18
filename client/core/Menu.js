@@ -29,7 +29,12 @@ const Menu = withRouter(({history}) => (
         <Button style={isActive(history, "/users")}>Users</Button>
       </Link>
       {
-        !auth.isAuthenticated() && (<span>
+        // below is a condition rendering (<condition> && <elements to be rendered>).
+        // In javascript, true && expression always evaluate to expression, and false
+        // && expression always evaluate to false. Therefore, if the condition is true,
+        // the element right after the && will appear in the output
+
+        !auth.isAuthenticated() && (<span> 
           <Link to="/signup">
             <Button style={isActive(history, "/signup")}>Sign up
             </Button>
