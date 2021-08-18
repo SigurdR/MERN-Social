@@ -31,7 +31,9 @@ app.use('/', userRoutes);
 app.use('/', authRoutes);
 
 app.get('*', (req, res) => {
+    // generation CSS Style
     const sheets = new ServerStyleSheets()
+    // generate markup with renderToString
     const context = {}
     const markup = ReactDOMServer.renderToString(
         sheets.collect(
@@ -42,6 +44,8 @@ app.get('*', (req, res) => {
             </StaticRouter>
         )
     )
+
+    // send a template with markup and css 
 
     if (context.url) {
         return res.redirect(303, context.url)

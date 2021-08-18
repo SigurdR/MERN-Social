@@ -1,3 +1,5 @@
+// the below markup & css arguments are generated from the express.js
+
 export default ({markup, css}) => {
     return `<!doctype html>
         <html lang="en">
