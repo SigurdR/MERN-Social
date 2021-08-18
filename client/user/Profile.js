@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const photoUrl = values.user.__id
+  ? `/api/users/photo/${values.user.__id}?${new Date().getTime()}`
+  : '/api/users/defaultphoto'
+
 export default function Profile({ match }) {
   const classes = useStyles()
   const [user, setUser] = useState({})
@@ -67,7 +71,7 @@ export default function Profile({ match }) {
         <List dense>
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
+              <Avatar src={photoUrl}>
                 <Person/>
               </Avatar>
             </ListItemAvatar>
@@ -84,6 +88,9 @@ export default function Profile({ match }) {
             }
           </ListItem>
           <Divider/>
+          <ListItem>
+            <ListItemText primary={this.state.user.about}/>
+          </ListItem>
           <ListItem>
             <ListItemText primary={"Joined: " + (
               new Date(user.created)).toDateString()}/>
