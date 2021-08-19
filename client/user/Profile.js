@@ -30,14 +30,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const photoUrl = values.user.__id
-  ? `/api/users/photo/${values.user.__id}?${new Date().getTime()}`
-  : '/api/users/defaultphoto'
+// const photoUrl = values.user.__id
+//   ? `/api/users/photo/${values.user.__id}?${new Date().getTime()}`
+//   : '/api/users/defaultphoto'
 
 export default function Profile({ match }) {
   const classes = useStyles()
-  const [user, setUser] = useState({})
-  const [redirectToSignin, setRedirectToSignin] = useState(false)
+  // const [user, setUser] = useState({})
+  const [values, setValues] = useState({
+    user: {following:[], followers:[]},
+    redirectToSignin: false,
+    following: false
+  })
+  // const [redirectToSignin, setRedirectToSignin] = useState(false)
   const jwt = auth.isAuthenticated()
 
   useEffect(() => {
@@ -48,9 +53,10 @@ export default function Profile({ match }) {
       userId: match.params.userId
     }, {t: jwt.token}, signal).then((data) => {
       if (data && data.error) {
-        setRedirectToSignin(true)
+        setValues({...values, redirectToSignin: true})
       } else {
-        setUser(data)
+        let following = checkFollow(data)
+        setValues({...values, user: data, following: following})
       }
     })
 
@@ -60,42 +66,47 @@ export default function Profile({ match }) {
 
   }, [match.params.userId])
   
-    if (redirectToSignin) {
-      return <Redirect to='/signin'/>
-    }
-    return (
-      <Paper className={classes.root} elevation={4}>
-        <Typography variant="h6" className={classes.title}>
-          Profile
-        </Typography>
-        <List dense>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar src={photoUrl}>
-                <Person/>
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={user.name} secondary={user.email}/> {
-             auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id &&
-              (<ListItemSecondaryAction>
-                <Link to={"/user/edit/" + user._id}>
-                  <IconButton aria-label="Edit" color="primary">
-                    <Edit/>
-                  </IconButton>
-                </Link>
-                <DeleteUser userId={user._id}/>
-              </ListItemSecondaryAction>)
-            }
-          </ListItem>
-          <Divider/>
-          <ListItem>
-            <ListItemText primary={this.state.user.about}/>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary={"Joined: " + (
-              new Date(user.created)).toDateString()}/>
-          </ListItem>
-        </List>
-      </Paper>
-    )
-  }
+  // if (redirectToSignin) {
+  //   return <Redirect to='/signin'/>
+  // }
+
+  const photoUrl = values.user._id
+  ? `/api/users/photo/${values.user._id}?${new Date().getTime()}`
+  : '/api/users/defaultphoto'
+
+  return (
+    <Paper className={classes.root} elevation={4}>
+      <Typography variant="h6" className={classes.title}>
+        Profile
+      </Typography>
+      <List dense>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar src={photoUrl}>
+              <Person/>
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={values.user.name} secondary={values.user.email}/> {
+            auth.isAuthenticated().user && auth.isAuthenticated().user._id == values.user._id &&
+            (<ListItemSecondaryAction>
+              <Link to={"/user/edit/" + values.user._id}>
+                <IconButton aria-label="Edit" color="primary">
+                  <Edit/>
+                </IconButton>
+              </Link>
+              <DeleteUser userId={values.user._id}/>
+            </ListItemSecondaryAction>)
+          }
+        </ListItem>
+        <Divider/>
+        <ListItem>
+          {/* <ListItemText primary={values.user.about} secondary={"Joined: " + (
+            new Date(user.created)).toDateString()}/>
+        </ListItem> */}
+        <ListItemText primary={values.user.about} secondary={"Joined: " + (
+            new Date(values.user.created)).toDateString()}/>
+        </ListItem>
+      </List>
+    </Paper>
+  )
+}

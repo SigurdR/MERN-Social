@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
+import FileUpload from '@material-ui/icons/AddPhotoAlternate'
 import auth from './../auth/auth-helper'
 import {read, update} from './api-user.js'
 import {Redirect} from 'react-router-dom'
@@ -94,6 +95,10 @@ export default function EditProfile({ match }) {
     setValues({...values, [name]: value })
   }
 
+  const photoUrl = values.id
+    ? `/api/users/photo/${values.id}?{new Date().getTime()}`
+    : '/api/users/defaultphoto'
+
     if (values.redirectToProfile) {
       return (<Redirect to={'/user/' + values.userId}/>)
     }
@@ -106,15 +111,17 @@ export default function EditProfile({ match }) {
           <input accept="image/*" type="file"
             onChange={handleChange('photo')}
             style={{display:'none'}}
-            id="icon-button-file" />
+            id="icon-button-file"
+            className={classes.input} />
             <label htmlFor="icon-button-file">
               <Button variant="contained" color="default" component="span">
-                Upload <FileUpload/ >
+                Upload 
+                <FileUpload />
               </Button>
             </label>
             <span className={classes.filename}>
               {values.photo ? values.photo.name : ''}
-            </span>
+            </span><br />
           <TextField id="name" label="Name" className={classes.textField} value={values.name} onChange={handleChange('name')} margin="normal"/><br/>
           <TextField
             id="multiline-flexible"
@@ -123,7 +130,9 @@ export default function EditProfile({ match }) {
             rows="2"
             value={values.about}
             onChange={handleChange('about')}
-          />
+            className={classes.textfield}
+            margin="normal"
+          /><br />
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
           <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
           <br/> {
