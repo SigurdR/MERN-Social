@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
+import Avatar from '@material-ui/core/Avatar'
 import { makeStyles } from '@material-ui/core/styles'
 import FileUpload from '@material-ui/icons/AddPhotoAlternate'
 import auth from './../auth/auth-helper'
@@ -42,11 +43,14 @@ export default function EditProfile({ match }) {
   const classes = useStyles()
   const [values, setValues] = useState({
     name: '',
+    about: '',
+    photo: '',
     password: '',
     email: '',
     open: false,
     error: '',
-    redirectToProfile: false
+    redirectToProfile: false,
+    id: ''
   })
   const jwt = auth.isAuthenticated()
 
@@ -60,7 +64,7 @@ export default function EditProfile({ match }) {
       if (data && data.error) {
         setValues({...values, error: data.error})
       } else {
-        setValues({...values, name: data.name, email: data.email})
+        setValues({...values,  id: data._id, name: data.name, email: data.email, about: data.about})
       }
     })
     return function cleanup(){
@@ -108,9 +112,9 @@ export default function EditProfile({ match }) {
           <Typography variant="h6" className={classes.title}>
             Edit Profile
           </Typography>
+          <Avatar src={photoUrl} className={classes.bigAvatar}/><br />
           <input accept="image/*" type="file"
             onChange={handleChange('photo')}
-            style={{display:'none'}}
             id="icon-button-file"
             className={classes.input} />
             <label htmlFor="icon-button-file">
