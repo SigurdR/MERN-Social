@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "A MERN stack based social media application",
   "license": "MIT",
+  "main": "./dist/server.generated.js",
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
@@ -32,7 +33,6 @@
     "express": "4.17.1",
     "express-jwt": "5.3.1",
     "formidable": "^1.2.2",
-    "fs": "^0.0.1-security",
     "helmet": "3.22.0",
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.15",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import auth from './auth-helper';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
         auth.isAuthenticated() ? (
             <Component {...props} />
@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             }} />
         )
     )}/>
-};
+);
 
 export default PrivateRoute;
 
@@ -22,4 +22,4 @@ export default PrivateRoute;
 // isAuthenticated method, otherwise the user will be redirected
 // to the Signin component. Components that should have restricted
 // access, such as the user profile component, should be loaded 
-//here
+// here

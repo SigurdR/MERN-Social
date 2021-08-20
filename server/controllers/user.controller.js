@@ -81,6 +81,7 @@ const update = (req, res) => {
         }
     })
 }
+
 const remove = async (req, res) => {
   try {
     let user = req.profile
@@ -189,7 +190,7 @@ export default {
     list, 
     remove, 
     update, 
-    photo, 
+    photo,
     defaultPhoto, 
     addFollowing,
     addFollower,

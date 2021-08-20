@@ -14,29 +14,40 @@ import {read, update} from './api-user.js'
 import {Redirect} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    maxWidth: 600,
-    margin: 'auto',
-    textAlign: 'center',
-    marginTop: theme.spacing(5),
-    paddingBottom: theme.spacing(2)
-  },
-  title: {
-    margin: theme.spacing(2),
-    color: theme.palette.protectedTitle
-  },
-  error: {
-    verticalAlign: 'middle'
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 300
-  },
-  submit: {
-    margin: 'auto',
-    marginBottom: theme.spacing(2)
-  }
+    card: {
+      maxWidth: 600,
+      margin: 'auto',
+      textAlign: 'center',
+      marginTop: theme.spacing(5),
+      paddingBottom: theme.spacing(2)
+    },
+    title: {
+      margin: theme.spacing(2),
+      color: theme.palette.protectedTitle
+    },
+    error: {
+      verticalAlign: 'middle'
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 300
+    },
+    submit: {
+      margin: 'auto',
+      marginBottom: theme.spacing(2)
+    },
+    bigAvatar: {
+      width: 60,
+      height: 60,
+      margin: 'auto'
+    },
+    input: {
+      display: 'none'
+    },
+    filename:{
+      marginLeft:'10px'
+    }
 }))
 
 export default function EditProfile({ match }) {
@@ -73,7 +84,7 @@ export default function EditProfile({ match }) {
 
   }, [match.params.userId])
 
-  const clickSubmit = () => {
+ const clickSubmit = () => {
     let userData = new FormData ()
     values.name && userData.append('name', values.name)
     values.email && userData.append('email', values.email)
@@ -92,6 +103,7 @@ export default function EditProfile({ match }) {
       }
     })
   }
+
   const handleChange = name => event => {
     const value = name === 'photo'
       ? event.target.files[0]
@@ -113,16 +125,13 @@ export default function EditProfile({ match }) {
             Edit Profile
           </Typography>
           <Avatar src={photoUrl} className={classes.bigAvatar}/><br />
-          <input accept="image/*" type="file"
-            onChange={handleChange('photo')}
-            id="icon-button-file"
-            className={classes.input} />
-            <label htmlFor="icon-button-file">
-              <Button variant="contained" color="default" component="span">
-                Upload 
-                <FileUpload />
-              </Button>
-            </label>
+          <input accept="image/*" type="file" onChange={handleChange('photo')} id="icon-button-file" className={classes.input} />
+          <label htmlFor="icon-button-file">
+            <Button variant="contained" color="default" component="span">
+              Upload 
+              <FileUpload />
+            </Button>
+          </label>
             <span className={classes.filename}>
               {values.photo ? values.photo.name : ''}
             </span><br />

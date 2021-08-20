@@ -26,8 +26,14 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(5)
   }),
   title: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.protectedTitle
+    margin: `${theme.spacing(2)}px ${theme.spacing(1)}px 0`,
+    color: theme.palette.protectedTitle,
+    fontSize: '1em'
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60,
+    margin: 10
   }
 }))
 
@@ -87,14 +93,14 @@ export default function Profile({ match }) {
       }
     })
   }
-  
-  // if (redirectToSignin) {
-  //   return <Redirect to='/signin'/>
-  // }
 
   const photoUrl = values.user._id
   ? `/api/users/photo/${values.user._id}?${new Date().getTime()}`
   : '/api/users/defaultphoto'
+
+  if (values.redirectToSignin) {
+    return <Redirect to='/signin'/>
+  }
 
   return (
     <Paper className={classes.root} elevation={4}>
@@ -117,7 +123,7 @@ export default function Profile({ match }) {
                 <DeleteUser userId={values.user._id}/>
               </ListItemSecondaryAction>)
             : (<FollowProfileButton following={values.following}
-                onButtonClick={ clickFollowButton}/>)
+                onButtonClick={clickFollowButton}/>)
           }
         </ListItem>
         <Divider/>
