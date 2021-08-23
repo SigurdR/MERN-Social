@@ -116,7 +116,7 @@ export default function EditProfile({ match }) {
     : '/api/users/defaultphoto'
 
     if (values.redirectToProfile) {
-      return (<Redirect to={'/user/' + values.userId}/>)
+      return (<Redirect to={'/user/' + values.id}/>)
     }
     return (
       <Card className={classes.card}>
@@ -125,7 +125,7 @@ export default function EditProfile({ match }) {
             Edit Profile
           </Typography>
           <Avatar src={photoUrl} className={classes.bigAvatar}/><br />
-          <input accept="image/*" type="file" onChange={handleChange('photo')} id="icon-button-file" className={classes.input} />
+          <input accept="image/*" type="file" onChange={handleChange('photo')} id="icon-button-file" className={classes.input} style={{display: 'none'}}/>
           <label htmlFor="icon-button-file">
             <Button variant="contained" color="default" component="span">
               Upload 
