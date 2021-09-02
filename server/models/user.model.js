@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    salt: String,
     updated: Date,
     hashed_password: {
         type: String,
@@ -32,8 +33,7 @@ const UserSchema = new mongoose.Schema({
         contentType: String
     },
     following: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-    followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-    salt: String
+    followers: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 })
 
 UserSchema

@@ -25,9 +25,6 @@ const Menu = withRouter(({history}) => (
           <HomeIcon/>
         </IconButton>
       </Link>
-      <Link to="/users">
-        <Button style={isActive(history, "/users")}>Users</Button>
-      </Link>
       {
         // below is a condition rendering (<condition> && <elements to be rendered>).
         // In javascript, true && expression always evaluate to expression, and false
