@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Post (props) {
-    const classes = useSytles()
+    const classes = useStyles()
     const jwt = auth.isAuthenticated()
     const checkLike = (likes) => {
         let match = likes.indexOf(jwt.user._id) !== -1
@@ -95,7 +95,7 @@ export default function Post (props) {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar src={'/api/users/photo/' + props.post.postedBy._id}/>
+                    <Avatar src={'/api/users/photo/'+props.post.postedBy._id}/>
                 }
                 action={props.post.postedBy._id === auth.isAuthenticated().user._id &&
                     <IconButton onClick={deletePost}>
@@ -133,12 +133,12 @@ export default function Post (props) {
                 </IconButton> <span>{values.comments.length}</span>
             </CardActions>
             <Divider />
-            <Comments postId={props.post._id} comment={values.comments} updateComments={updateComments}/>
+            <Comments postId={props.post._id} comments={values.comments} updateComments={updateComments}/>
         </Card>
     )
 }
 
-Post.PropTypes = {
+Post.propTypes = {
     post: PropTypes.object.isRequired,
     onRemove: PropTypes.func.isRequired
 }

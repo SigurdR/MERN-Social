@@ -13,7 +13,7 @@ const create = (req, res, next) => {
             })
         }
         let post = new Post(fields)
-        post.postedBy = req.Profile
+        post.postedBy = req.profile
         if (files.photo) {
             post.photo.data = fs.readFileSync(files.photo.path)
             post.photo.contentType = files.photo.type
@@ -61,7 +61,7 @@ const listByUser = async (req, res) => {
 }
 
 const listNewsFeed = async (req, res) => {
-    let folowing = req.profile.following
+    let following = req.profile.following
     following.push(req.profile._id)
     try {
         let posts = await Post.find({postedBy: { $in : req.profile.following }})

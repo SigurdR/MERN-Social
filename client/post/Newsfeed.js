@@ -34,7 +34,7 @@ export default function Newsfeed () {
         const signal = abortController.signal
 
         listNewsFeed({
-            useId: jwt.user._id
+            userId: jwt.user._id
         }, {
             t: jwt.token
         }, signal).then((data) => {
@@ -51,8 +51,7 @@ export default function Newsfeed () {
 
     const addPost = (post) => {
         const updatedPosts = [...posts]
-        const index = updatedPosts.indexOf(post)
-        updatedPosts.splice(index, 1)
+        updatedPosts.unshift(post)
         setPosts(updatedPosts)
     }
 
