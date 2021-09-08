@@ -106,7 +106,7 @@ export default function EditProfile({ match }) {
 
   const handleChange = name => event => {
     const value = name === 'photo'
-      ? event.target.files[0]
+      ? event.target.files[0] //event.target refers to the clicked element
       : event.target.value
     setValues({...values, [name]: value })
   }
